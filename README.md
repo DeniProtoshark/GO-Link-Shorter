@@ -28,4 +28,4 @@ GO-Link-Shorte умеет:
 
 Клонируем:
 ```bash
-git clone https://github.com/DeniProtoshark/GO-Link-Shorter.git
+git clone https://github.com/DeniProtoshark/GO-Link-Shorter/tree/main/Link%20Shorter
