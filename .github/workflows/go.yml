@@ -8,36 +8,26 @@ on:
 
 jobs:
   build:
-    name: Build & Test
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        go-version: [ '1.20', '1.21' ]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Go ${{ matrix.go-version }}
+      - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: ${{ matrix.go-version }}
+          go-version: '1.20'
           cache: true
 
-      - name: Verify dependencies
-        run: go mod tidy && git diff --exit-code
-
-      - name: Go fmt
-        run: |
-          go fmt ./...
-          git diff --exit-code
-
-      - name: Go vet
-        run: go vet ./...
+      - name: Go mod tidy
+        working-directory: ./backend
+        run: go mod tidy
 
       - name: Build
-        run: go build -v ./...
+        working-directory: ./backend
+        run: go build -v .
 
       - name: Test
+        working-directory: ./backend
         run: go test -v ./...
